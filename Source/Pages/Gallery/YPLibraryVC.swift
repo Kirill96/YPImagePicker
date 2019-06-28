@@ -88,6 +88,11 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
             strongSelf.updateCropInfo()
         }
     }
+
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
     
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

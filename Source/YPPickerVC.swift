@@ -126,7 +126,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cameraVC?.v.shotButton.isEnabled = true
-        
+        navigationController?.navigationBar.isHidden = false
         updateMode(with: currentController)
     }
     
