@@ -66,7 +66,6 @@ class ExampleViewController: UIViewController {
     func showPicker() {
         
         var config = YPImagePickerConfiguration()
-
         /* Uncomment and play around with the configuration 👨‍🔬 🚀 */
 
         /* Set this to true if you want to force the  library output to be a squared image. Defaults to false */
@@ -86,7 +85,7 @@ class ExampleViewController: UIViewController {
         // config.usesFrontCamera = true
 
         /* Adds a Filter step in the photo taking process. Defaults to true */
-        // config.showsFilters = false
+        config.showsPhotoFilters = false
 
         /* Manage filters by yourself */
 //        config.filters = [YPFilter(name: "Mono", coreImageFilterName: "CIPhotoEffectMono"),
@@ -142,7 +141,7 @@ class ExampleViewController: UIViewController {
         /* Defines if the bottom bar should be hidden when showing the picker. Default is false */
         config.hidesBottomBar = true
 
-        config.library.maxNumberOfItems = 5
+        config.library.maxNumberOfItems = 1000
         
         /* Disable scroll to change between mode */
         // config.isScrollToChangeModesEnabled = false

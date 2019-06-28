@@ -59,6 +59,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         if YPConfig.screens.contains(.library) {
             libraryVC = YPLibraryVC()
             libraryVC?.delegate = self
+            libraryVC?.didSelectItems = self.didSelectItems
         }
         
         // Camera
@@ -272,15 +273,46 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         switch mode {
         case .library:
             setTitleViewWithTitle(aTitle: libraryVC?.title ?? "")
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.next,
-                                                                style: .done,
-                                                                target: self,
-                                                                action: #selector(done))
-            navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.tintColor
+//            navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.next,
+//                                                                style: .done,
+//                                                                target: self,
+//                                                                action: #selector(done))
+//            navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.tintColor
             
             // Disable Next Button until minNumberOfItems is reached.
-            navigationItem.rightBarButtonItem?.isEnabled = libraryVC!.selection.count >= YPConfig.library.minNumberOfItems
-
+//            navigationItem.rightBarButtonItem?.isEnabled = libraryVC!.selection.count >= YPConfig.library.minNumberOfItems
+            navigationItem.rightBarButtonItem = nil
+            
+            let count = libraryVC!.selection.count
+            
+            libraryVC!.v.nextBadgeLabel.text = "\(count)"
+            libraryVC!.v.addAlbumBadgeLabel.text = "\(count)"
+            
+            if count < 10 {
+                libraryVC!.v.addAlbumBigButton.isHidden = true
+                libraryVC!.v.addAlbumBadgeView.isHidden = true
+                libraryVC!.v.nextButton.isHidden = false
+                libraryVC!.v.nextBadgeVieww.isHidden = false
+                libraryVC!.v.addAlbumSmallButton.isHidden = false
+            } else {
+                libraryVC!.v.addAlbumBigButton.isHidden = false
+                libraryVC!.v.addAlbumBadgeView.isHidden = false
+                libraryVC!.v.nextButton.isHidden = true
+                libraryVC!.v.nextBadgeVieww.isHidden = true
+                libraryVC!.v.addAlbumSmallButton.isHidden = true
+            }
+            
+            if YPConfig.isCreateAlbumFamily {
+                libraryVC!.v.addAlbumBigButton.isHidden = false
+                libraryVC!.v.addAlbumBadgeView.isHidden = false
+                libraryVC!.v.nextButton.isHidden = true
+                libraryVC!.v.nextBadgeVieww.isHidden = true
+                libraryVC!.v.addAlbumSmallButton.isHidden = true
+                libraryVC!.v.addAlbumBigButton.setTitle("Создать альбом", for: .normal)
+            } else {
+                libraryVC!.v.addAlbumBigButton.setTitle("Добавить в альбом", for: .normal)
+            }
+            
         case .camera:
             navigationItem.titleView = nil
             title = cameraVC?.title

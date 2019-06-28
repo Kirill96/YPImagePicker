@@ -21,6 +21,8 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     internal let mediaManager = LibraryMediaManager()
     internal var latestImageTapped = ""
     internal let panGestureHelper = PanGestureHelper()
+    
+    public var didSelectItems: (([YPMediaItem]) -> Void)?
 
     // MARK: - Init
     
@@ -62,8 +64,9 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         }
         v.assetViewContainer.multipleSelectionButton.isHidden = !(YPConfig.library.maxNumberOfItems > 1)
         v.maxNumberWarningLabel.text = String(format: YPConfig.wordings.warningMaxItemsLimit, YPConfig.library.maxNumberOfItems)
+        v.libraryVC = self
     }
-    
+
     // MARK: - View Lifecycle
     
     public override func loadView() {
@@ -495,5 +498,18 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
+    }
+    
+    func done() {
+        self.doAfterPermissionCheck { [weak self] in
+            self?.selectedMedia(photoCallback: { photo in
+                self?.didSelectItems?([YPMediaItem.photo(p: photo)])
+            }, videoCallback: { video in
+                self?.didSelectItems?([YPMediaItem
+                    .video(v: video)])
+            }, multipleItemsCallback: { items in
+                self?.didSelectItems?(items)
+            })
+        }
     }
 }

@@ -19,6 +19,9 @@ public struct YPImagePickerConfiguration {
     
     public init() {}
     
+    /// Create album family mode, defaults to false
+    public var isCreateAlbumFamily = false
+    
     /// Scroll to change modes, defaults to true
     public var isScrollToChangeModesEnabled = true
     

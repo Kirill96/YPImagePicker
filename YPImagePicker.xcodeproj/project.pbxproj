@@ -92,6 +92,11 @@
 		EBD66105208104EA00EA276E /* YPIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD66104208104EA00EA276E /* YPIcons.swift */; };
 		EBD66107208104F400EA276E /* YPColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD66106208104F400EA276E /* YPColors.swift */; };
 		EBE6CA48210389ED005B0A6A /* CIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE6CA47210389ED005B0A6A /* CIImage+Extensions.swift */; };
+		ED5ED35722C66D8D0054BDB7 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED5ED35422C66D8D0054BDB7 /* Inter-Medium.ttf */; };
+		ED5ED35822C66D8D0054BDB7 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED5ED35522C66D8D0054BDB7 /* Inter-Regular.ttf */; };
+		ED5ED35922C66D8D0054BDB7 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED5ED35622C66D8D0054BDB7 /* Inter-SemiBold.ttf */; };
+		ED5ED35B22C66E1B0054BDB7 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5ED35A22C66E1B0054BDB7 /* AppFont.swift */; };
+		ED5ED35D22C66E750054BDB7 /* CirceRounded-Regular4.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED5ED35C22C66E750054BDB7 /* CirceRounded-Regular4.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +202,11 @@
 		EBD66104208104EA00EA276E /* YPIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YPIcons.swift; sourceTree = "<group>"; };
 		EBD66106208104F400EA276E /* YPColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YPColors.swift; sourceTree = "<group>"; };
 		EBE6CA47210389ED005B0A6A /* CIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extensions.swift"; sourceTree = "<group>"; };
+		ED5ED35422C66D8D0054BDB7 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
+		ED5ED35522C66D8D0054BDB7 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		ED5ED35622C66D8D0054BDB7 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		ED5ED35A22C66E1B0054BDB7 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
+		ED5ED35C22C66E750054BDB7 /* CirceRounded-Regular4.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CirceRounded-Regular4.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +312,7 @@
 		99C6D69D1F1FB5C100711DB2 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				ED5ED35322C66D740054BDB7 /* Fonts */,
 				99C6D6B81F1FB5C100711DB2 /* YPImagePicker.swift */,
 				99C6D6B51F1FB5C100711DB2 /* YPPickerVC.swift */,
 				99019E4F2018CDDF007325C2 /* Configuration */,
@@ -457,6 +468,18 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		ED5ED35322C66D740054BDB7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				ED5ED35422C66D8D0054BDB7 /* Inter-Medium.ttf */,
+				ED5ED35522C66D8D0054BDB7 /* Inter-Regular.ttf */,
+				ED5ED35622C66D8D0054BDB7 /* Inter-SemiBold.ttf */,
+				ED5ED35C22C66E750054BDB7 /* CirceRounded-Regular4.otf */,
+				ED5ED35A22C66E1B0054BDB7 /* AppFont.swift */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -546,8 +569,12 @@
 			files = (
 				8458057421819B95004F241C /* YPImagePickerLocalizable.strings in Resources */,
 				99C6D6B91F1FB5C100711DB2 /* Assets.xcassets in Resources */,
+				ED5ED35D22C66E750054BDB7 /* CirceRounded-Regular4.otf in Resources */,
 				99C6D6BD1F1FB5C100711DB2 /* YPLibraryView.xib in Resources */,
+				ED5ED35722C66D8D0054BDB7 /* Inter-Medium.ttf in Resources */,
+				ED5ED35822C66D8D0054BDB7 /* Inter-Regular.ttf in Resources */,
 				EB59F453208766B800811B7B /* YPVideoFiltersVC.xib in Resources */,
+				ED5ED35922C66D8D0054BDB7 /* Inter-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +649,7 @@
 				EB473E1B208E1B7400D16105 /* NSFileManager+Extensions.swift in Sources */,
 				99A0529A1F20A19B005600B3 /* YPAlbumVC.swift in Sources */,
 				99A0529D1F20B45D005600B3 /* YPAlbumView.swift in Sources */,
+				ED5ED35B22C66E1B0054BDB7 /* AppFont.swift in Sources */,
 				EB473E21208E1BF400D16105 /* YPTrimError.swift in Sources */,
 				EB584C03207B990200265B38 /* AVFoundation+Extensions.swift in Sources */,
 				99C6D6BF1F1FB5C100711DB2 /* YPGridView.swift in Sources */,

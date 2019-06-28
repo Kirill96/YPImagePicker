@@ -12,43 +12,46 @@ import Stevia
 class YPMultipleSelectionIndicator: UIView {
     
     let circle = UIView()
-    let label = UILabel()
+    let icon = UIImageView()
     var selectionColor = UIColor.black
     
     convenience init() {
         self.init(frame: .zero)
         
-        let size: CGFloat = 20
+        let size: CGFloat = 25
         
         sv(
             circle,
-            label
+            icon
         )
         
         circle.fillContainer()
         circle.size(size)
-        label.fillContainer()
+        icon.fillContainer()
         
-        circle.layer.cornerRadius = size / 2.0
-        label.textAlignment = .center
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+//        circle.layer.cornerRadius = size / 2.0
+//        label.textAlignment = .center
+//        label.textColor = .white
+//        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        icon.image = YPConfig.icons.ovalEmpty
         
         set(number: nil)
     }
     
     func set(number: Int?) {
-        label.isHidden = (number == nil)
+//        label.isHidden = (number == nil)
         if let number = number {
-            circle.backgroundColor = selectionColor
-            circle.layer.borderColor = UIColor.clear.cgColor
-            circle.layer.borderWidth = 0
-            label.text = "\(number)"
+//            circle.backgroundColor = selectionColor
+//            circle.layer.borderColor = UIColor.clear.cgColor
+//            circle.layer.borderWidth = 0
+//            label.text = "\(number)"
+            icon.image = YPConfig.icons.ovalFull
         } else {
-            circle.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-            circle.layer.borderColor = UIColor.white.cgColor
-            circle.layer.borderWidth = 1
-            label.text = ""
+//            circle.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+//            circle.layer.borderColor = UIColor.white.cgColor
+//            circle.layer.borderWidth = 1
+//            label.text = ""
+            icon.image = YPConfig.icons.ovalEmpty
         }
     }
 }

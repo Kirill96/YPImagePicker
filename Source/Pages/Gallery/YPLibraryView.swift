@@ -18,11 +18,20 @@ final class YPLibraryView: UIView {
     @IBOutlet weak var assetZoomableView: YPAssetZoomableView!
     @IBOutlet weak var assetViewContainer: YPAssetViewContainer!
     @IBOutlet weak var assetViewContainerConstraintTop: NSLayoutConstraint!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextBadgeVieww: UIView!
+    @IBOutlet weak var nextBadgeLabel: UILabel!
+    @IBOutlet weak var addAlbumSmallButton: UIButton!
+    @IBOutlet weak var addAlbumBigButton: UIButton!
+    @IBOutlet weak var addAlbumBadgeView: UIView!
+    @IBOutlet weak var addAlbumBadgeLabel: UILabel!
     
     let maxNumberWarningView = UIView()
     let maxNumberWarningLabel = UILabel()
     let progressView = UIProgressView()
     let line = UIView()
+    
+    public var libraryVC: YPLibraryVC?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,7 +48,22 @@ final class YPLibraryView: UIView {
         line.backgroundColor = .white
         
 //        setupMaxNumberOfItemsView()
+        configureNextButtons()
         setupProgressBarView()
+    }
+    
+    func configureNextButtons() {
+        nextButton.clipsToBounds = true
+        nextButton.layer.cornerRadius = 23.5
+        
+        nextBadgeVieww.clipsToBounds = true
+        nextBadgeVieww.layer.cornerRadius = 11.5
+        
+        addAlbumBigButton.clipsToBounds = true
+        addAlbumBigButton.layer.cornerRadius = 23.5
+        
+        addAlbumBadgeView.clipsToBounds = true
+        addAlbumBadgeView.layer.cornerRadius = 11.5
     }
     
     /// At the bottom there is a view that is visible when selected a limit of items with multiple selection
@@ -82,6 +106,16 @@ final class YPLibraryView: UIView {
         progressView.isHidden = true
         progressView.isUserInteractionEnabled = false
     }
+    
+    //  - Buttons actions
+    @IBAction func nextbuttonAction(_ sender: Any) {
+        libraryVC?.done()
+    }
+    
+    @IBAction func addAlbumbuttonAction(_ sender: Any) {
+        libraryVC?.done()
+    }
+
 }
 
 // MARK: - UI Helpers

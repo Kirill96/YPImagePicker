@@ -53,6 +53,11 @@ open class YPImagePicker: UINavigationController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override open func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
 override open func viewDidLoad() {
         super.viewDidLoad()
         picker.didClose = { [weak self] in
