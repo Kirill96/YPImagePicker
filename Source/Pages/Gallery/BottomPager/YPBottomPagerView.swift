@@ -30,11 +30,11 @@ final class YPBottomPagerView: UIView {
             |header| ~ 44
         )
         
-        if #available(iOS 11.0, *) {
-            header.Bottom == safeAreaLayoutGuide.Bottom
-        } else {
+//        if #available(iOS 11.0, *) {
+//            header.Bottom == safeAreaLayoutGuide.Bottom
+//        } else {
             header.bottom(0)
-        }
+//        }
         header.heightConstraint?.constant = YPConfig.hidesBottomBar ? 0 : 44
         
         clipsToBounds = false
