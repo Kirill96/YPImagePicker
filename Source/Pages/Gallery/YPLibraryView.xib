@@ -30,8 +30,16 @@
                         </collectionView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3g-h5-gNb">
                             <rect key="frame" x="0.0" y="470" width="400" height="80"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="swM-fe-Ekq">
+                                    <rect key="frame" x="177" y="25" width="46" height="30"/>
+                                    <state key="normal" title="Button"/>
+                                </button>
+                            </subviews>
                             <color key="backgroundColor" red="0.56078431370000004" green="0.57254901960000004" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
+                                <constraint firstItem="swM-fe-Ekq" firstAttribute="centerY" secondItem="u3g-h5-gNb" secondAttribute="centerY" id="0ls-wc-lcO"/>
+                                <constraint firstItem="swM-fe-Ekq" firstAttribute="centerX" secondItem="u3g-h5-gNb" secondAttribute="centerX" id="9aS-Ot-gvo"/>
                                 <constraint firstAttribute="height" constant="80" id="z6P-7E-2A3"/>
                             </constraints>
                         </view>
