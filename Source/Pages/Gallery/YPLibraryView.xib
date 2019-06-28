@@ -19,7 +19,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="400" height="550"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6id-Ro-HHC">
-                            <rect key="frame" x="0.0" y="400" width="400" height="150"/>
+                            <rect key="frame" x="0.0" y="400" width="400" height="70"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="jnu-mn-3OB">
                                 <size key="itemSize" width="60" height="60"/>
@@ -38,9 +38,9 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="6id-Ro-HHC" secondAttribute="bottom" id="H2u-OW-Xid"/>
                         <constraint firstAttribute="trailing" secondItem="u3g-h5-gNb" secondAttribute="trailing" id="HFy-69-INk"/>
                         <constraint firstAttribute="bottom" secondItem="u3g-h5-gNb" secondAttribute="bottom" id="Zcc-jS-PIb"/>
+                        <constraint firstItem="u3g-h5-gNb" firstAttribute="top" secondItem="6id-Ro-HHC" secondAttribute="bottom" id="be8-kx-zhr"/>
                         <constraint firstAttribute="trailing" secondItem="6id-Ro-HHC" secondAttribute="trailing" id="fKl-55-Q4t"/>
                         <constraint firstItem="6id-Ro-HHC" firstAttribute="leading" secondItem="9Cu-Zp-X0j" secondAttribute="leading" id="l5I-IF-1rx"/>
                         <constraint firstItem="u3g-h5-gNb" firstAttribute="leading" secondItem="9Cu-Zp-X0j" secondAttribute="leading" id="siV-eb-ueQ"/>

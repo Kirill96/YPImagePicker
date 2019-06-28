@@ -140,7 +140,7 @@ class ExampleViewController: UIViewController {
         config.hidesStatusBar = false
 
         /* Defines if the bottom bar should be hidden when showing the picker. Default is false */
-        config.hidesBottomBar = false
+        config.hidesBottomBar = true
 
         config.library.maxNumberOfItems = 5
         
