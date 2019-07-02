@@ -175,7 +175,7 @@ class ExampleViewController: UIViewController {
         
 
         /* Multiple media implementation */
-        picker.didFinishPicking { [unowned picker] items, cancelled in
+        picker.didFinishPicking { [unowned picker] items, cancelled, isAddToAlbum in
             
             if cancelled {
                 print("Picker was canceled")

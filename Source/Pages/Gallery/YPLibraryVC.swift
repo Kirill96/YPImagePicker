@@ -22,7 +22,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     internal var latestImageTapped = ""
     internal let panGestureHelper = PanGestureHelper()
     
-    public var didSelectItems: (([YPMediaItem]) -> Void)?
+    public var didSelectItems: (([YPMediaItem], _ isAddToAlbum: Bool) -> Void)?
 
     // MARK: - Init
     
@@ -505,15 +505,15 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
-    func done() {
+    func done(isCreateAlbum: Bool) {
         self.doAfterPermissionCheck { [weak self] in
             self?.selectedMedia(photoCallback: { photo in
-                self?.didSelectItems?([YPMediaItem.photo(p: photo)])
+                self?.didSelectItems?([YPMediaItem.photo(p: photo)], isCreateAlbum)
             }, videoCallback: { video in
                 self?.didSelectItems?([YPMediaItem
-                    .video(v: video)])
+                    .video(v: video)], isCreateAlbum)
             }, multipleItemsCallback: { items in
-                self?.didSelectItems?(items)
+                self?.didSelectItems?(items, isCreateAlbum)
             })
         }
     }

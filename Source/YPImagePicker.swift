@@ -16,8 +16,8 @@ public protocol YPImagePickerDelegate: AnyObject {
 
 open class YPImagePicker: UINavigationController {
     
-    private var _didFinishPicking: (([YPMediaItem], Bool) -> Void)?
-    public func didFinishPicking(completion: @escaping (_ items: [YPMediaItem], _ cancelled: Bool) -> Void) {
+    private var _didFinishPicking: (([YPMediaItem], Bool, _ isAddToAlbum: Bool) -> Void)?
+    public func didFinishPicking(completion: @escaping (_ items: [YPMediaItem], _ cancelled: Bool, _ isAddToAlbum: Bool) -> Void) {
         _didFinishPicking = completion
     }
     public weak var imagePickerDelegate: YPImagePickerDelegate?
@@ -29,8 +29,8 @@ open class YPImagePicker: UINavigationController {
     // This nifty little trick enables us to call the single version of the callbacks.
     // This keeps the backwards compatibility keeps the api as simple as possible.
     // Multiple selection becomes available as an opt-in.
-    private func didSelect(items: [YPMediaItem]) {
-        _didFinishPicking?(items, false)
+    private func didSelect(items: [YPMediaItem], isAddToAlbum: Bool) {
+        _didFinishPicking?(items, false, isAddToAlbum)
     }
     
     let loadingView = YPLoadingView()
@@ -61,13 +61,13 @@ open class YPImagePicker: UINavigationController {
 override open func viewDidLoad() {
         super.viewDidLoad()
         picker.didClose = { [weak self] in
-            self?._didFinishPicking?([], true)
+            self?._didFinishPicking?([], true, false)
         }
         viewControllers = [picker]
         setupLoadingView()
         navigationBar.isTranslucent = false
 
-        picker.didSelectItems = { [weak self] items in
+        picker.didSelectItems = { [weak self] (items, isAddToAlbum) in
             // Use Fade transition instead of default push animation
             let transition = CATransition()
             transition.duration = 0.3
@@ -78,11 +78,11 @@ override open func viewDidLoad() {
             // Multiple items flow
             if items.count > 1 {
                 if YPConfig.library.skipSelectionsGallery {
-                    self?.didSelect(items: items)
+                    self?.didSelect(items: items, isAddToAlbum: isAddToAlbum)
                     return
                 } else {
                     let selectionsGalleryVC = YPSelectionsGalleryVC(items: items) { _, items in
-                        self?.didSelect(items: items)
+                        self?.didSelect(items: items, isAddToAlbum: isAddToAlbum)
                     }
                     self?.pushViewController(selectionsGalleryVC, animated: true)
                     return
@@ -102,7 +102,7 @@ override open func viewDidLoad() {
                             YPPhotoSaver.trySaveImage(photo.image, inAlbumNamed: YPConfig.albumName)
                         }
                     }
-                    self?.didSelect(items: [mediaItem])
+                    self?.didSelect(items: [mediaItem], isAddToAlbum: isAddToAlbum)
                 }
                 
                 func showCropVC(photo: YPMediaPhoto, completion: @escaping (_ aphoto: YPMediaPhoto) -> Void) {
@@ -136,11 +136,11 @@ override open func viewDidLoad() {
                     let videoFiltersVC = YPVideoFiltersVC.initWith(video: video,
                                                                    isFromSelectionVC: false)
                     videoFiltersVC.didSave = { [weak self] outputMedia in
-                        self?.didSelect(items: [outputMedia])
+                        self?.didSelect(items: [outputMedia], isAddToAlbum: isAddToAlbum)
                     }
                     self?.pushViewController(videoFiltersVC, animated: true)
                 } else {
-                    self?.didSelect(items: [YPMediaItem.video(v: video)])
+                    self?.didSelect(items: [YPMediaItem.video(v: video)], isAddToAlbum: isAddToAlbum)
                 }
             }
         }

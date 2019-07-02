@@ -27,7 +27,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
     
     /// Private callbacks to YPImagePicker
     public var didClose:(() -> Void)?
-    public var didSelectItems: (([YPMediaItem]) -> Void)?
+    public var didSelectItems: (([YPMediaItem], _ isAddToAlbum: Bool) -> Void)?
     
     enum Mode {
         case library
@@ -67,7 +67,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
             cameraVC = YPCameraVC()
             cameraVC?.didCapturePhoto = { [weak self] img in
                 self?.didSelectItems?([YPMediaItem.photo(p: YPMediaPhoto(image: img,
-                                                                        fromCamera: true))])
+                                                                        fromCamera: true))], false)
             }
         }
         
@@ -78,7 +78,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
                 self?.didSelectItems?([YPMediaItem
                     .video(v: YPMediaVideo(thumbnail: thumbnailFromVideoPath(videoURL),
                                            videoURL: videoURL,
-                                           fromCamera: true))])
+                                           fromCamera: true))], false)
             }
         }
         
@@ -341,12 +341,12 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         if mode == .library {
             libraryVC.doAfterPermissionCheck { [weak self] in
                 libraryVC.selectedMedia(photoCallback: { photo in
-                    self?.didSelectItems?([YPMediaItem.photo(p: photo)])
+                    self?.didSelectItems?([YPMediaItem.photo(p: photo)], false)
                 }, videoCallback: { video in
                     self?.didSelectItems?([YPMediaItem
-                        .video(v: video)])
+                        .video(v: video)], false)
                 }, multipleItemsCallback: { items in
-                    self?.didSelectItems?(items)
+                    self?.didSelectItems?(items, false)
                 })
             }
         }
