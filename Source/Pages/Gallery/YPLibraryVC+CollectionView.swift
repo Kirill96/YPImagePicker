@@ -17,40 +17,40 @@ extension YPLibraryVC {
         v.collectionView.register(YPLibraryViewCell.self, forCellWithReuseIdentifier: "YPLibraryViewCell")
         
         // Long press on cell to enable multiple selection
-        let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(longPressGR:)))
-        longPressGR.minimumPressDuration = 0.5
-        v.collectionView.addGestureRecognizer(longPressGR)
+//        let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(longPressGR:)))
+//        longPressGR.minimumPressDuration = 0.5
+//        v.collectionView.addGestureRecognizer(longPressGR)
     }
     
     /// When tapping on the cell with long press, clear all previously selected cells.
-    @objc func handleLongPress(longPressGR: UILongPressGestureRecognizer) {
-        if multipleSelectionEnabled || isProcessing || YPConfig.library.maxNumberOfItems <= 1 {
-            return
-        }
-        
-        if longPressGR.state == .began {
-            let point = longPressGR.location(in: v.collectionView)
-            guard let indexPath = v.collectionView.indexPathForItem(at: point) else {
-                return
-            }
-            startMultipleSelection(at: indexPath)
-        }
-    }
+//    @objc func handleLongPress(longPressGR: UILongPressGestureRecognizer) {
+//        if multipleSelectionEnabled || isProcessing || YPConfig.library.maxNumberOfItems <= 1 {
+//            return
+//        }
+//
+//        if longPressGR.state == .began {
+//            let point = longPressGR.location(in: v.collectionView)
+//            guard let indexPath = v.collectionView.indexPathForItem(at: point) else {
+//                return
+//            }
+//            startMultipleSelection(at: indexPath)
+//        }
+//    }
     
-    func startMultipleSelection(at indexPath: IndexPath) {
-        currentlySelectedIndex = indexPath.row
-        multipleSelectionButtonTapped()
-        
-        // Update preview.
-        changeAsset(mediaManager.fetchResult[indexPath.row])
-        
-        // Bring preview down and keep selected cell visible.
-        panGestureHelper.resetToOriginalState()
-        if !panGestureHelper.isImageShown {
-            v.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-        }
-        v.refreshImageCurtainAlpha()
-    }
+//    func startMultipleSelection(at indexPath: IndexPath) {
+//        currentlySelectedIndex = indexPath.row
+//        multipleSelectionButtonTapped()
+//
+//        // Update preview.
+//        changeAsset(mediaManager.fetchResult[indexPath.row])
+//
+//        // Bring preview down and keep selected cell visible.
+//        panGestureHelper.resetToOriginalState()
+//        if !panGestureHelper.isImageShown {
+//            v.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+//        }
+//        v.refreshImageCurtainAlpha()
+//    }
     
     // MARK: - Library collection view cell managing
     
@@ -60,21 +60,22 @@ extension YPLibraryVC {
             selection.remove(at: positionIndex)
 
             // Refresh the numbers
-            var selectedIndexPaths = [IndexPath]()
-            mediaManager.fetchResult.enumerateObjects { [unowned self] (asset, index, _) in
-                if self.selection.contains(where: { $0.assetIdentifier == asset.localIdentifier }) {
-                    selectedIndexPaths.append(IndexPath(row: index, section: 0))
-                }
-            }
-            v.collectionView.reloadItems(at: selectedIndexPaths)
-			
+//            var selectedIndexPaths = [IndexPath]()
+//            mediaManager.fetchResult.enumerateObjects { [unowned self] (asset, index, _) in
+//                if self.selection.contains(where: { $0.assetIdentifier == asset.localIdentifier }) {
+//                    selectedIndexPaths.append(IndexPath(row: index, section: 0))
+//                }
+//            }
+//            v.collectionView.reloadItems(at: selectedIndexPaths)
+
             // Replace the current selected image with the previously selected one
-            if let previouslySelectedIndexPath = selectedIndexPaths.last {
-                v.collectionView.deselectItem(at: indexPath, animated: false)
-                v.collectionView.selectItem(at: previouslySelectedIndexPath, animated: false, scrollPosition: [])
-                currentlySelectedIndex = previouslySelectedIndexPath.row
-                changeAsset(mediaManager.fetchResult[previouslySelectedIndexPath.row])
-            }
+//            if let previouslySelectedIndexPath = selectedIndexPaths.last {
+//                v.collectionView.deselectItem(at: indexPath, animated: false)
+//                v.collectionView.selectItem(at: previouslySelectedIndexPath, animated: false, scrollPosition: [])
+//                currentlySelectedIndex = previouslySelectedIndexPath.row
+//                changeAsset(mediaManager.fetchResult[previouslySelectedIndexPath.row])
+//                print("11111111222333333444444")
+//            }
 			
             checkLimit()
         }
@@ -130,14 +131,14 @@ extension YPLibraryVC: UICollectionViewDelegate {
                                         cell.imageView.image = image
                                     }
         }
-        
+
         let isVideo = (asset.mediaType == .video)
         cell.durationLabel.isHidden = !isVideo
         cell.durationLabel.text = isVideo ? YPHelper.formattedStrigFrom(asset.duration) : ""
         cell.multipleSelectionIndicator.isHidden = !multipleSelectionEnabled
         cell.isSelected = currentlySelectedIndex == indexPath.row
-        
-        // Set correct selection number
+
+//         Set correct selection number
         if let index = selection.firstIndex(where: { $0.assetIdentifier == asset.localIdentifier }) {
             cell.multipleSelectionIndicator.set(number: index + 1) // start at 1, not 0
         } else {
@@ -159,20 +160,20 @@ extension YPLibraryVC: UICollectionViewDelegate {
         panGestureHelper.resetToOriginalState()
         
         // Only scroll cell to top if preview is hidden.
-        if !panGestureHelper.isImageShown {
-            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-        }
-        v.refreshImageCurtainAlpha()
+//        if !panGestureHelper.isImageShown {
+//            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+//        }
+//        v.refreshImageCurtainAlpha()
 
         if multipleSelectionEnabled {
             
             let cellIsInTheSelectionPool = isInSelectionPool(indexPath: indexPath)
-            let cellIsCurrentlySelected = previouslySelectedIndexPath.row == currentlySelectedIndex
+//            let cellIsCurrentlySelected = previouslySelectedIndexPath.row == currentlySelectedIndex
 
             if cellIsInTheSelectionPool {
-                if cellIsCurrentlySelected {
+//                if cellIsCurrentlySelected {
                     deselect(indexPath: indexPath)
-                }
+//                }
             } else if isLimitExceeded == false {
                 addToSelection(indexPath: indexPath)
             }

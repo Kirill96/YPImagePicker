@@ -142,6 +142,7 @@ class ExampleViewController: UIViewController {
         config.hidesBottomBar = true
 
         config.library.maxNumberOfItems = 1000
+        config.library.defaultMultipleSelection = true
         
         /* Disable scroll to change between mode */
         // config.isScrollToChangeModesEnabled = false

@@ -55,14 +55,14 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         
         setupCollectionView()
         registerForLibraryChanges()
-        panGestureHelper.registerForPanGesture(on: v)
+//        panGestureHelper.registerForPanGesture(on: v)
         registerForTapOnPreview()
         refreshMediaRequest()
 
         if YPConfig.library.defaultMultipleSelection {
             multipleSelectionButtonTapped()
         }
-        v.assetViewContainer.multipleSelectionButton.isHidden = !(YPConfig.library.maxNumberOfItems > 1)
+//        v.assetViewContainer.multipleSelectionButton.isHidden = !(YPConfig.library.maxNumberOfItems > 1)
         v.maxNumberWarningLabel.text = String(format: YPConfig.wordings.warningMaxItemsLimit, YPConfig.library.maxNumberOfItems)
         v.libraryVC = self
     }
@@ -80,13 +80,13 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         // When crop area changes in multiple selection mode,
         // we need to update the scrollView values in order to restore
         // them when user selects a previously selected item.
-        v.assetZoomableView.cropAreaDidChange = { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
+//        v.assetZoomableView.cropAreaDidChange = { [weak self] in
+//            guard let strongSelf = self else {
+//                return
+//            }
 
-            strongSelf.updateCropInfo()
-        }
+//            strongSelf.updateCropInfo()
+//        }
     }
 
     public override func viewWillAppear(_ animated: Bool) {
@@ -97,21 +97,21 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        v.assetViewContainer.squareCropButton
-            .addTarget(self,
-                       action: #selector(squareCropButtonTapped),
-                       for: .touchUpInside)
-        v.assetViewContainer.multipleSelectionButton
-            .addTarget(self,
-                       action: #selector(multipleSelectionButtonTapped),
-                       for: .touchUpInside)
+//        v.assetViewContainer.squareCropButton
+//            .addTarget(self,
+//                       action: #selector(squareCropButtonTapped),
+//                       for: .touchUpInside)
+//        v.assetViewContainer.multipleSelectionButton
+//            .addTarget(self,
+//                       action: #selector(multipleSelectionButtonTapped),
+//                       for: .touchUpInside)
         
         // Forces assetZoomableView to have a contentSize.
         // otherwise 0 in first selection triggering the bug : "invalid image size 0x0"
         // Also fits the first element to the square if the onlySquareFromLibrary = true
-        if !YPConfig.library.onlySquare && v.assetZoomableView.contentSize == CGSize(width: 0, height: 0) {
-            v.assetZoomableView.setZoomScale(1, animated: false)
-        }
+//        if !YPConfig.library.onlySquare && v.assetZoomableView.contentSize == CGSize(width: 0, height: 0) {
+//            v.assetZoomableView.setZoomScale(1, animated: false)
+//        }
         
         // Activate multiple selection when using `minNumberOfItems`
         if YPConfig.library.minNumberOfItems > 1 {
@@ -132,7 +132,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     @objc
     func squareCropButtonTapped() {
         doAfterPermissionCheck { [weak self] in
-            self?.v.assetViewContainer.squareCropButtonTapped()
+//            self?.v.assetViewContainer.squareCropButtonTapped()
         }
     }
     
@@ -144,24 +144,24 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         if !multipleSelectionEnabled {
             selection.removeAll()
         }
-        
+
         // Prevent desactivating multiple selection when using `minNumberOfItems`
         if YPConfig.library.minNumberOfItems > 1 && multipleSelectionEnabled {
             return
         }
-        
+
         multipleSelectionEnabled = !multipleSelectionEnabled
 
         if multipleSelectionEnabled {
             if selection.isEmpty {
-                let asset = mediaManager.fetchResult[currentlySelectedIndex]
-                selection = [
-                    YPLibrarySelection(index: currentlySelectedIndex,
-                                       cropRect: v.currentCropRect(),
-                                       scrollViewContentOffset: v.assetZoomableView!.contentOffset,
-                                       scrollViewZoomScale: v.assetZoomableView!.zoomScale,
-                                       assetIdentifier: asset.localIdentifier)
-                ]
+//                let asset = mediaManager.fetchResult[currentlySelectedIndex]
+//                selection = [
+//                    YPLibrarySelection(index: currentlySelectedIndex,
+//                                       cropRect: CGRect(),
+//                                       scrollViewContentOffset: v.assetZoomableView!.contentOffset,
+//                                       scrollViewZoomScale: v.assetZoomableView!.zoomScale,
+//                                       assetIdentifier: asset.localIdentifier)
+//                ]
             }
         } else {
             selection.removeAll()
@@ -177,17 +177,17 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     // MARK: - Tap Preview
     
     func registerForTapOnPreview() {
-        let tapImageGesture = UITapGestureRecognizer(target: self, action: #selector(tappedImage))
-        v.assetViewContainer.addGestureRecognizer(tapImageGesture)
+//        let tapImageGesture = UITapGestureRecognizer(target: self, action: #selector(tappedImage))
+//        v.assetViewContainer.addGestureRecognizer(tapImageGesture)
     }
     
     @objc
     func tappedImage() {
-        if !panGestureHelper.isImageShown {
-            panGestureHelper.resetToOriginalState()
-            // no dragup? needed? dragDirection = .up
-            v.refreshImageCurtainAlpha()
-        }
+//        if !panGestureHelper.isImageShown {
+//            panGestureHelper.resetToOriginalState()
+//            // no dragup? needed? dragDirection = .up
+//            v.refreshImageCurtainAlpha()
+//        }
     }
     
     // MARK: - Permissions
@@ -287,28 +287,30 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     
     func changeAsset(_ asset: PHAsset) {
         latestImageTapped = asset.localIdentifier
-        delegate?.libraryViewStartedLoading()
+//        delegate?.libraryViewStartedLoading()
         
-        let completion = {
-            self.v.hideLoader()
-            self.v.hideGrid()
+//        let completion = {
+//            self.v.hideLoader()
+//            self.v.hideGrid()
             self.delegate?.libraryViewFinishedLoading()
-            self.v.assetViewContainer.refreshSquareCropButton()
-            self.updateCropInfo()
-        }
+//            self.v.assetViewContainer.refreshSquareCropButton()
+//            self.updateCropInfo()
+//        }
         
         DispatchQueue.global(qos: .userInitiated).async {
             switch asset.mediaType {
             case .image:
-                self.v.assetZoomableView.setImage(asset,
-                                                  mediaManager: self.mediaManager,
-                                                  storedCropPosition: self.fetchStoredCrop(),
-                                                  completion: completion)
+//                self.v.assetZoomableView.setImage(asset,
+//                                                  mediaManager: self.mediaManager,
+//                                                  storedCropPosition: self.fetchStoredCrop(),
+//                                                  completion: completion)
+                ()
             case .video:
-                self.v.assetZoomableView.setVideo(asset,
-                                                  mediaManager: self.mediaManager,
-                                                  storedCropPosition: self.fetchStoredCrop(),
-                                                  completion: completion)
+//                self.v.assetZoomableView.setVideo(asset,
+//                                                  mediaManager: self.mediaManager,
+//                                                  storedCropPosition: self.fetchStoredCrop(),
+//                                                  completion: completion)
+                ()
             case .audio, .unknown:
                 ()
             }
@@ -349,9 +351,9 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         
         // Fill new values
         var selectedAsset = selection[selectedAssetIndex]
-        selectedAsset.scrollViewContentOffset = v.assetZoomableView.contentOffset
-        selectedAsset.scrollViewZoomScale = v.assetZoomableView.zoomScale
-        selectedAsset.cropRect = v.currentCropRect()
+//        selectedAsset.scrollViewContentOffset = v.assetZoomableView.contentOffset
+//        selectedAsset.scrollViewZoomScale = v.assetZoomableView.zoomScale
+//        selectedAsset.cropRect = v.currentCropRect()
         
         // Replace
         selection.remove(at: selectedAssetIndex)
@@ -380,25 +382,25 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
                                    withCropRect: CGRect? = nil,
                                    callback: @escaping (_ photo: UIImage, _ exif: [String : Any]) -> Void) {
         delegate?.libraryViewStartedLoading()
-        let cropRect = withCropRect ?? DispatchQueue.main.sync { v.currentCropRect() }
-        let ts = targetSize(for: asset, cropRect: cropRect)
-        mediaManager.imageManager?.fetchImage(for: asset, cropRect: cropRect, targetSize: ts, callback: callback)
+//        let cropRect = withCropRect ?? DispatchQueue.main.sync { v.currentCropRect() }
+//        let ts = targetSize(for: asset, cropRect: cropRect)
+        mediaManager.imageManager?.fetchImage(for: asset, callback: callback)
     }
     
     private func checkVideoLengthAndCrop(for asset: PHAsset,
                                          withCropRect: CGRect? = nil,
                                          callback: @escaping (_ videoURL: URL) -> Void) {
         if fitsVideoLengthLimits(asset: asset) == true {
-            delegate?.libraryViewStartedLoading()
-            let normalizedCropRect = withCropRect ?? DispatchQueue.main.sync { v.currentCropRect() }
-            let ts = targetSize(for: asset, cropRect: normalizedCropRect)
-            let xCrop: CGFloat = normalizedCropRect.origin.x * CGFloat(asset.pixelWidth)
-            let yCrop: CGFloat = normalizedCropRect.origin.y * CGFloat(asset.pixelHeight)
-            let resultCropRect = CGRect(x: xCrop,
-                                        y: yCrop,
-                                        width: ts.width,
-                                        height: ts.height)
-            mediaManager.fetchVideoUrlAndCrop(for: asset, cropRect: resultCropRect, callback: callback)
+//            delegate?.libraryViewStartedLoading()
+//            let normalizedCropRect = withCropRect ?? DispatchQueue.main.sync { v.currentCropRect() }
+//            let ts = targetSize(for: asset, cropRect: normalizedCropRect)
+//            let xCrop: CGFloat = normalizedCropRect.origin.x * CGFloat(asset.pixelWidth)
+//            let yCrop: CGFloat = normalizedCropRect.origin.y * CGFloat(asset.pixelHeight)
+//            let resultCropRect = CGRect(x: xCrop,
+//                                        y: yCrop,
+//                                        width: ts.width,
+//                                        height: ts.height)
+//            mediaManager.fetchVideoUrlAndCrop(for: asset, cropRect: resultCropRect, callback: callback)
         }
     }
     
@@ -496,7 +498,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     // MARK: - Player
     
     func pausePlayer() {
-        v.assetZoomableView.videoView.pause()
+//        v.assetZoomableView.videoView.pause()
     }
     
     // MARK: - Deinit

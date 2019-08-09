@@ -353,7 +353,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
     }
     
     func stopAll() {
-        libraryVC?.v.assetZoomableView.videoView.deallocate()
+//        libraryVC?.v.assetZoomableView.videoView.deallocate()
         videoVC?.stopCamera()
         cameraVC?.stopCamera()
     }
@@ -364,7 +364,7 @@ extension YPPickerVC: YPLibraryViewDelegate {
     public func libraryViewStartedLoading() {
         libraryVC?.isProcessing = true
         DispatchQueue.main.async {
-            self.v.scrollView.isScrollEnabled = false
+//            self.v.scrollView.isScrollEnabled = false
             self.libraryVC?.v.fadeInLoader()
             self.navigationItem.rightBarButtonItem = YPLoaders.defaultLoader
         }

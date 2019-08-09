@@ -20,7 +20,7 @@ extension PHCachingImageManager {
         return options
     }
     
-    func fetchImage(for asset: PHAsset, cropRect: CGRect, targetSize: CGSize, callback: @escaping (UIImage, [String: Any]) -> Void) {
+    func fetchImage(for asset: PHAsset, callback: @escaping (UIImage, [String: Any]) -> Void) {
         let options = photoImageRequestOptions()
     
         // Fetch Highiest quality image possible.
@@ -28,17 +28,19 @@ extension PHCachingImageManager {
             if let data = data, let image = UIImage(data: data)?.resetOrientation() {
             
                 // Crop the high quality image manually.
-                let xCrop: CGFloat = cropRect.origin.x * CGFloat(asset.pixelWidth)
-                let yCrop: CGFloat = cropRect.origin.y * CGFloat(asset.pixelHeight)
-                let scaledCropRect = CGRect(x: xCrop,
-                                            y: yCrop,
-                                            width: targetSize.width,
-                                            height: targetSize.height)
-                if let imageRef = image.cgImage?.cropping(to: scaledCropRect) {
-                    let croppedImage = UIImage(cgImage: imageRef)
-                    let exifs = self.metadataForImageData(data: data)
-                    callback(croppedImage, exifs)
-                }
+//                let xCrop: CGFloat = cropRect.origin.x * CGFloat(asset.pixelWidth)
+//                let yCrop: CGFloat = cropRect.origin.y * CGFloat(asset.pixelHeight)
+//                let scaledCropRect = CGRect(x: xCrop,
+//                                            y: yCrop,
+//                                            width: targetSize.width,
+//                                            height: targetSize.height)
+//                if let imageRef = image.cgImage?.cropping(to: scaledCropRect) {
+//                    let croppedImage = UIImage(cgImage: imageRef)
+//                    let exifs = self.metadataForImageData(data: data)
+//                    callback(croppedImage, exifs)
+//                }
+                let exifs = self.metadataForImageData(data: data)
+                callback(image, exifs)
             }
         }
     }

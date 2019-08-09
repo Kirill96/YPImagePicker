@@ -12,7 +12,7 @@ import Photos
 
 final class YPLibraryView: UIView {
     
-    let assetZoomableViewMinimalVisibleHeight: CGFloat  = 50
+//    let assetZoomableViewMinimalVisibleHeight: CGFloat  = 50
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var assetZoomableView: YPAssetZoomableView!
@@ -28,28 +28,28 @@ final class YPLibraryView: UIView {
     
     let maxNumberWarningView = UIView()
     let maxNumberWarningLabel = UILabel()
-    let progressView = UIProgressView()
-    let line = UIView()
+//    let progressView = UIProgressView()
+//    let line = UIView()
     
     public var libraryVC: YPLibraryVC?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        sv(
-            line
-        )
+//        sv(
+//            line
+//        )
+//
+//        layout(
+//            assetViewContainer,
+//            |line| ~ 1
+//        )
         
-        layout(
-            assetViewContainer,
-            |line| ~ 1
-        )
-        
-        line.backgroundColor = .white
+//        line.backgroundColor = .white
         
 //        setupMaxNumberOfItemsView()
         configureNextButtons()
-        setupProgressBarView()
+//        setupProgressBarView()
     }
     
     func configureNextButtons() {
@@ -92,20 +92,20 @@ final class YPLibraryView: UIView {
     }
     
     /// When video is processing this bar appears
-    func setupProgressBarView() {
-        sv(
-            progressView
-        )
-        
-        progressView.height(5)
-        progressView.Top == line.Top
-        progressView.Width == line.Width
-        progressView.progressViewStyle = .bar
-        progressView.trackTintColor = YPConfig.colors.progressBarTrackColor
-        progressView.progressTintColor = YPConfig.colors.progressBarCompletedColor ?? YPConfig.colors.tintColor
-        progressView.isHidden = true
-        progressView.isUserInteractionEnabled = false
-    }
+//    func setupProgressBarView() {
+//        sv(
+//            progressView
+//        )
+//
+//        progressView.height(5)
+//        progressView.Top == line.Top
+//        progressView.Width == line.Width
+//        progressView.progressViewStyle = .bar
+//        progressView.trackTintColor = YPConfig.colors.progressBarTrackColor
+//        progressView.progressTintColor = YPConfig.colors.progressBarCompletedColor ?? YPConfig.colors.tintColor
+//        progressView.isHidden = true
+//        progressView.isUserInteractionEnabled = false
+//    }
     
     //  - Buttons actions
     @IBAction func nextbuttonAction(_ sender: Any) {
@@ -133,47 +133,47 @@ extension YPLibraryView {
     // MARK: - Grid
     
     func hideGrid() {
-        assetViewContainer.grid.alpha = 0
+//        assetViewContainer.grid.alpha = 0
     }
     
     // MARK: - Loader and progress
     
     func fadeInLoader() {
-        UIView.animate(withDuration: 0.2) {
-            self.assetViewContainer.spinnerView.alpha = 1
-        }
+//        UIView.animate(withDuration: 0.2) {
+//            self.assetViewContainer.spinnerView.alpha = 1
+//        }
     }
     
     func hideLoader() {
-        assetViewContainer.spinnerView.alpha = 0
+//        assetViewContainer.spinnerView.alpha = 0
     }
     
     func updateProgress(_ progress: Float) {
-        progressView.isHidden = progress > 0.99 || progress == 0
-        progressView.progress = progress
-        UIView.animate(withDuration: 0.1, animations: progressView.layoutIfNeeded)
+//        progressView.isHidden = progress > 0.99 || progress == 0
+//        progressView.progress = progress
+//        UIView.animate(withDuration: 0.1, animations: progressView.layoutIfNeeded)
     }
     
     // MARK: - Crop Rect
     
-    func currentCropRect() -> CGRect {
-        guard let cropView = assetZoomableView else {
-            return CGRect.zero
-        }
-        let normalizedX = min(1, cropView.contentOffset.x &/ cropView.contentSize.width)
-        let normalizedY = min(1, cropView.contentOffset.y &/ cropView.contentSize.height)
-        let normalizedWidth = min(1, cropView.frame.width / cropView.contentSize.width)
-        let normalizedHeight = min(1, cropView.frame.height / cropView.contentSize.height)
-        return CGRect(x: normalizedX, y: normalizedY, width: normalizedWidth, height: normalizedHeight)
-    }
+//    func currentCropRect() -> CGRect {
+//        guard let cropView = assetZoomableView else {
+//            return CGRect.zero
+//        }
+//        let normalizedX = min(1, cropView.contentOffset.x &/ cropView.contentSize.width)
+//        let normalizedY = min(1, cropView.contentOffset.y &/ cropView.contentSize.height)
+//        let normalizedWidth = min(1, cropView.frame.width / cropView.contentSize.width)
+//        let normalizedHeight = min(1, cropView.frame.height / cropView.contentSize.height)
+//        return CGRect(x: normalizedX, y: normalizedY, width: normalizedWidth, height: normalizedHeight)
+//    }
     
     // MARK: - Curtain
     
-    func refreshImageCurtainAlpha() {
-        let imageCurtainAlpha = abs(assetViewContainerConstraintTop.constant)
-            / (assetViewContainer.frame.height - assetZoomableViewMinimalVisibleHeight)
-        assetViewContainer.curtain.alpha = imageCurtainAlpha
-    }
+//    func refreshImageCurtainAlpha() {
+//        let imageCurtainAlpha = abs(assetViewContainerConstraintTop.constant)
+//            / (assetViewContainer.frame.height - assetZoomableViewMinimalVisibleHeight)
+//        assetViewContainer.curtain.alpha = imageCurtainAlpha
+//    }
     
     func cellSize() -> CGSize {
         let size = UIScreen.main.bounds.width/4 * UIScreen.main.scale
