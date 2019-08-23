@@ -109,11 +109,15 @@ final class YPLibraryView: UIView {
     
     //  - Buttons actions
     @IBAction func nextbuttonAction(_ sender: Any) {
-        libraryVC?.done(isCreateAlbum: false)
+        if (libraryVC?.selection.count ?? 0) > 0 {
+            libraryVC?.done(isCreateAlbum: false)
+        }
     }
     
     @IBAction func addAlbumbuttonAction(_ sender: Any) {
-        libraryVC?.done(isCreateAlbum: true)
+        if (libraryVC?.selection.count ?? 0) > 0 {
+            libraryVC?.done(isCreateAlbum: true)
+        }
     }
 
 }
